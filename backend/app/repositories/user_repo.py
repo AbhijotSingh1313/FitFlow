@@ -13,3 +13,5 @@ def create_user(db: Session, email: str, password_hash: str):
     db.refresh(user)  # to get saved data 
 
     return user
+def get_user_by_email(db: Session, email: str):
+    return db.query(User).filter(User.email == email).first()
