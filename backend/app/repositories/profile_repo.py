@@ -39,3 +39,14 @@ def update_my_profile(db: Session, user_email: str, data):
     db.commit()
     db.refresh(profile)
     return profile
+
+def delete_my_profile(db: Session, user_email: str):
+    user = db.query(User).filter(User.email == user_email).first()
+
+    profile = db.query(Profile).filter(Profile.user_id == user.id).first()
+
+    if profile:
+        db.delete(profile)
+        db.commit()
+
+    return {"message": "Profile deleted"}
