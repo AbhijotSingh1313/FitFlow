@@ -5,6 +5,7 @@ from app.database.session import SessionLocal
 from app.schemas.profile_schema import ProfileCreate, ProfileResponse
 from app.repositories.profile_repo import create_profile, get_my_profile
 from app.core.auth import get_current_user
+from app.repositories.profile_repo import update_my_profile
 
 router = APIRouter(prefix="/profile", tags=["Profile"])
 
@@ -32,3 +33,11 @@ def read_my_profile(
     current_user: str = Depends(get_current_user)
 ):
     return get_my_profile(db, current_user)
+
+@router.put("/me", response_model=ProfileResponse)
+def update_profile(
+    data: ProfileCreate,
+    db: Session = Depends(get_db),
+    current_user: str = Depends(get_current_user)
+):
+    return update_my_profile(db, current_user, data)

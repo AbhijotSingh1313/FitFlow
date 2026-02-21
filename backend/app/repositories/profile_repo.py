@@ -24,3 +24,18 @@ def create_profile(db: Session, user_email: str, data):
 def get_my_profile(db: Session, user_email: str):
     user = db.query(User).filter(User.email == user_email).first()
     return db.query(Profile).filter(Profile.user_id == user.id).first()
+
+def update_my_profile(db: Session, user_email: str, data):
+    user = db.query(User).filter(User.email == user_email).first()
+
+    profile = db.query(Profile).filter(Profile.user_id == user.id).first()
+
+    profile.name = data.name
+    profile.age = data.age
+    profile.height = data.height
+    profile.weight = data.weight
+    profile.goal = data.goal
+
+    db.commit()
+    db.refresh(profile)
+    return profile
