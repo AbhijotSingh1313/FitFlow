@@ -9,6 +9,7 @@ from app.repositories.workout_repo import (
     delete_workout
 )
 from app.core.auth import get_current_user  # your JWT dependency
+from app.repositories.workout_repo import update_workout
 
 router = APIRouter(prefix="/workouts", tags=["Workouts"])
 
@@ -45,3 +46,12 @@ def remove_workout(
     current_user: str = Depends(get_current_user)
 ):
     return delete_workout(db, current_user, workout_id)
+
+@router.put("/{workout_id}", response_model=WorkoutResponse)
+def edit_workout(
+    workout_id: int,
+    data: WorkoutCreate,
+    db: Session = Depends(get_db),
+    current_user: str = Depends(get_current_user)
+):
+    return update_workout(db, current_user, workout_id, data)
