@@ -7,7 +7,7 @@ def create_workout(db: Session, user_email: str, data):
     user = db.query(User).filter(User.email == user_email).first()
 
     workout = Workout(
-        exercise=data.exercise,
+        exercise_id=data.exercise_id,
         sets=data.sets,
         reps=data.reps,
         weight=data.weight,

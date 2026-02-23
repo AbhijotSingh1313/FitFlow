@@ -7,6 +7,8 @@ from app.api.user_routes import router as user_router
 from app.api.profile_routes import router as profile_router
 from app.models.workout import Workout
 from app.api.workout_routes import router as workout_router
+from app.models.level import Level
+from app.models.exercise import Exercise
 
 # Create app FIRST
 app = FastAPI(
