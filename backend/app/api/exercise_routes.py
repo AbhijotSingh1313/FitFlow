@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import Optional, List
+from sqlalchemy import func
 
 from app.database.session import SessionLocal
 from app.models.exercise import Exercise
@@ -31,6 +32,8 @@ def get_exercises(
         query = query.filter(Exercise.level_id == level_id)
 
     if category:
-        query = query.filter(Exercise.category == category)
+        query = query.filter(
+        Exercise.category.ilike(category)
+        )
 
     return query.all()
