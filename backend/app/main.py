@@ -12,6 +12,7 @@ from app.models.exercise import Exercise
 from app.database.session import SessionLocal
 from app.models.level import Level
 from app.api import level_routes
+from app.api import exercise_routes
 
 # Create app FIRST
 app = FastAPI(
@@ -27,6 +28,7 @@ app.include_router(user_router, prefix="/users", tags=["Users"])
 app.include_router(profile_router)
 app.include_router(workout_router)
 app.include_router(level_routes.router)
+app.include_router(exercise_routes.router)
 # Root endpoint
 @app.get("/")
 def root():
