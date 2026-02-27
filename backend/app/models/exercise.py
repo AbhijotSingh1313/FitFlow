@@ -16,7 +16,9 @@ class Exercise(Base):
 
     default_sets = Column(Integer)
     default_reps = Column(Integer)
+    category = Column(String)   # Chest, Back, etc
 
+    is_predefined = Column(Boolean, default=True)
     # IMPORTANT
     is_custom = Column(Boolean, default=False)
     created_by = Column(Integer, ForeignKey("users.id"), nullable=True)
