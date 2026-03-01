@@ -1,14 +1,14 @@
 from pydantic import BaseModel
 
-class WorkoutCreate(BaseModel):
-    exercise: str
-    sets: int
-    reps: int
-    weight: int
-    date: str
 
-class WorkoutResponse(WorkoutCreate):
+class WorkoutCreate(BaseModel):
+    date: str
+    level_id: int
+
+
+class WorkoutResponse(BaseModel):
     id: int
+    date: str
 
     class Config:
         from_attributes = True

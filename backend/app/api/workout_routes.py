@@ -55,3 +55,4 @@ def edit_workout(
     current_user: str = Depends(get_current_user)
 ):
     return update_workout(db, current_user, workout_id, data)
+

@@ -1,19 +1,19 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, ForeignKey, String
 from sqlalchemy.orm import relationship
 from app.database.session import Base
 
-class Workout(Base):
-    __tablename__ = "user_progress"
 
-    id = Column(Integer, primary_key=True)
+class Workout(Base):
+    __tablename__ = "workouts"
+
+    id = Column(Integer, primary_key=True, index=True)
 
     user_id = Column(Integer, ForeignKey("users.id"))
-    exercise_id = Column(Integer, ForeignKey("exercises.id"))
 
-    sets = Column(Integer)
-    reps = Column(Integer)
-    time = Column(Integer)
-    weight = Column(Integer)
     date = Column(String)
 
-    exercise = relationship("Exercise")
+    workout_exercises = relationship(
+        "WorkoutExercise",
+        back_populates="workout",
+        cascade="all, delete"
+    )

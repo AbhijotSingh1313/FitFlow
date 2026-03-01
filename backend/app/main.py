@@ -8,7 +8,7 @@ from app.models.profile import Profile
 from app.models.workout import Workout
 from app.models.level import Level
 from app.models.exercise import Exercise
-
+import app.models.workout_exercise
 # Routers
 from app.api.user_routes import router as user_router
 from app.api.profile_routes import router as profile_router
